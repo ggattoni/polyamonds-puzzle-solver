@@ -10,6 +10,8 @@ requires-python = ">=3.12"
 dependencies = [
     "frozendict>=2.4.6",
     "matplotlib>=3.10.0",
+    "numpy>=2.2.2",
+    "ortools>=9.11.4210",
     "sympy>=1.13.3",
     "tqdm>=4.67.1",
 ]
@@ -26,6 +28,7 @@ dev = [
     "commitizen>=4.1.1",
     "ipython>=8.32.0",
     "pre-commit>=4.1.0",
+    "pyinstrument>=5.0.1",
     "ruff>=0.9.4",
 ]
 
