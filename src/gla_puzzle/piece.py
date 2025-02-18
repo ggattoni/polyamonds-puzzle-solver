@@ -90,14 +90,14 @@ def _is_reflection_same(piece: Piece) -> bool:
 
 
 @cache
-def _get_all_variations(piece: Piece, *, optimize: bool = False) -> list[Piece]:
+def _get_all_variations(piece: Piece) -> list[Piece]:
     """Return all possible variations of the piece."""
     transforms = []
     step = 1
     reflect = True
-    if optimize and any(_is_central_translation_symmetric(piece @ (k * sp.pi / 3)) for k in range(6)):
+    if any(_is_central_translation_symmetric(piece @ (k * sp.pi / 3)) for k in range(6)):
         step = 2
-    if optimize and any(_is_reflection_same(piece @ (k * sp.pi / 3)) for k in range(6)):
+    if any(_is_reflection_same(piece @ (k * sp.pi / 3)) for k in range(6)):
         reflect = False
     for k in range(0, 6, step):
         rotated_piece = piece @ (k * sp.pi / 3)
@@ -143,6 +143,6 @@ class Piece:
         """Reflect the piece across the real axis."""
         return _reflect(self, axis=axis)
 
-    def get_all_variations(self, *, optimize: bool = False) -> list[Piece]:
+    def get_all_variations(self) -> list[Piece]:
         """Return all possible variations of the piece."""
-        return _get_all_variations(self, optimize=optimize)
+        return _get_all_variations(self)

@@ -78,9 +78,11 @@ class Triangle:
         """Negate the triangle."""
         return _neg(self)
 
-    def __eq__(self, value: Triangle) -> bool:
+    def __eq__(self, other: Triangle) -> bool:
         """Check if two triangles are equal."""
-        return self.center == value.center
+        # return self.center == value.center
+        other_points = (other.a, other.b, other.c)
+        return self.a in other_points and self.b in other_points and self.c in other_points
 
     def __hash__(self) -> int:
         """Return the hash of the triangle."""

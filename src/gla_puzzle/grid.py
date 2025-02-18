@@ -38,6 +38,7 @@ def _place_piece(grid: Grid, piece: Piece, point: Point) -> Grid:
     """Place a piece in the grid."""
     new_grid = Grid(grid.triangles)
     new_grid.map = grid.map
+    new_grid.integer_mapping = grid.integer_mapping
     for triangle in piece.triangles:
         new_grid.map = new_grid.map.set(triangle + point, piece.name)
     return new_grid
@@ -51,6 +52,9 @@ class Grid:
         self.triangles = triangles
 
         self.map: frozendict[Triangle, str | None] = frozendict({triangle: None for triangle in self.triangles})
+        self.integer_mapping: frozendict[Triangle, int] = frozendict(
+            {triangle: i for i, triangle in enumerate(self.triangles)}
+        )
 
     @cached_property
     def points(self) -> set[Point]:

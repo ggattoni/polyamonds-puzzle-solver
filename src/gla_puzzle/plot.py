@@ -29,6 +29,7 @@ def plot_grid(grid: Grid) -> None:
         )
         plt.gca().add_patch(polygon)
 
+    plt.axis("off")
     plt.savefig(f"imgs/grid{num:05d}.jpg")
     num += 1
     plt.close()
