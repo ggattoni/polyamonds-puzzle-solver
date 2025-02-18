@@ -1,0 +1,43 @@
+[project]
+name = "gla-puzzle"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Giacomo Gattoni", email = "giacomo.gattoni@kantar-xtel.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "frozendict>=2.4.6",
+    "matplotlib>=3.10.0",
+    "sympy>=1.13.3",
+    "tqdm>=4.67.1",
+]
+
+[project.scripts]
+gla-puzzle = "gla_puzzle:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.1.1",
+    "ipython>=8.32.0",
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.4",
+]
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+fix = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "D213", "COM812", "ERA", "PLR0913", "T201", "B008", "D100", "INP001", "TD", "FIX002"]
+
+[tool.ruff.format]
+indent-style = "space"
+docstring-code-format = true
