@@ -64,7 +64,8 @@ def solve_all(
 
 if __name__ == "__main__":
     # from gla_puzzle.puzzles.xtechai import GRID, PIECES
-    from gla_puzzle.puzzles.luciano import GRID, PIECES
+    # from gla_puzzle.puzzles.luciano import GRID, PIECES
+    from gla_puzzle.puzzles.nicola import GRID, PIECES
 
     pieces = sorted(PIECES, key=lambda piece: len(piece.triangles), reverse=True)
 
