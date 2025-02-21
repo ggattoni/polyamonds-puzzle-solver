@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from tqdm import tqdm
 
 from gla_puzzle.grid import Grid
@@ -5,7 +7,7 @@ from gla_puzzle.piece import Piece
 from gla_puzzle.plot import plot_grid
 
 
-def solve(
+def _find_first_solution(
     grid: Grid, remaining_pieces: list[Piece], *, plot: bool = False, tqdm_position: int = 0
 ) -> tuple[Grid, bool]:
     """Solve the puzzle."""
@@ -24,19 +26,19 @@ def solve(
             grid.available_points(piece_variation), position=tqdm_position + 1, desc="Points", leave=False
         ):
             new_grid = grid.place_piece(piece_variation, point)
-            solution, solved = solve(new_grid, other_pieces, plot=plot, tqdm_position=tqdm_position + 2)
+            solution, solved = _find_first_solution(new_grid, other_pieces, plot=plot, tqdm_position=tqdm_position + 2)
             if solved:
                 return solution, True
 
     return grid, False
 
 
-def solve_all(
-    grid: Grid, remaining_pieces: list[Piece], *, plot: bool = False, tqdm_position: int = 0
+def _find_all_solutions(
+    grid: Grid, remaining_pieces: list[Piece], folder: Path | None = None, *, plot: bool = False, tqdm_position: int = 0
 ) -> tuple[Grid, bool]:
     """Solve the puzzle."""
     if plot:
-        plot_grid(grid)
+        plot_grid(grid, folder=folder / "tmp")
 
     if not remaining_pieces:
         return grid, True
@@ -51,21 +53,14 @@ def solve_all(
             grid.available_points(piece_variation), position=tqdm_position + 1, desc="Points", leave=False
         ):
             new_grid = grid.place_piece(piece_variation, point)
-            solution, solved = solve_all(new_grid, other_pieces, plot=plot, tqdm_position=tqdm_position + 2)
+            solution, solved = _find_all_solutions(new_grid, other_pieces, plot=plot, tqdm_position=tqdm_position + 2)
             if solved:
-                plot_grid(solution)
+                plot_grid(solution, folder=folder)
 
     return grid, False
 
 
-if __name__ == "__main__":
-    from gla_puzzle.puzzles.xtechai import GRID, PIECES
-    # from gla_puzzle.puzzles.luciano import GRID, PIECES
-    # from gla_puzzle.puzzles.nicola import GRID, PIECES
-
-    pieces = sorted(PIECES, key=lambda piece: len(piece.triangles), reverse=True)
-
-    # solution, _ = solve(GRID, pieces)
-    # plot_grid(solution)
-
-    solve_all(GRID, pieces, plot=False)
+def solve(grid: Grid, pieces: list[Piece], folder: Path | None = None, *, verbose: bool = False) -> None:  # noqa: ARG001
+    """Solve the puzzle."""
+    sorted_pieces = sorted(pieces, key=lambda piece: len(piece.triangles), reverse=True)
+    _find_all_solutions(grid, sorted_pieces, folder=folder, plot=False)

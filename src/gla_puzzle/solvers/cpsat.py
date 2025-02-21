@@ -1,6 +1,13 @@
+from pathlib import Path
+
 import numpy as np
 from ortools.sat.python import cp_model
 from tqdm import tqdm
+
+from gla_puzzle.grid import Grid
+from gla_puzzle.piece import Piece
+from gla_puzzle.plot import plot_grid
+from gla_puzzle.point import Point
 
 
 class SolutionStore(cp_model.CpSolverSolutionCallback):
@@ -30,14 +37,8 @@ class SolutionStore(cp_model.CpSolverSolutionCallback):
         return self.__solutions
 
 
-if __name__ == "__main__":
-    from gla_puzzle.plot import plot_grid
-    from gla_puzzle.point import Point
-    from gla_puzzle.puzzles.xtechai import GRID, PIECES
-
-    grid = GRID
-    pieces = PIECES
-
+def solve(grid: Grid, pieces: list[Piece], folder: Path | None = None, *, verbose: bool = False) -> None:
+    """Solve the puzzle."""
     num_cells = len(grid.triangles)
     num_pieces = len(pieces)
     num_columns = num_cells + num_pieces
@@ -45,7 +46,6 @@ if __name__ == "__main__":
     row_piece_mapping = {}
     rows = []
     row_counter = 0
-    # piece_counter = 0
 
     for piece_counter, piece in tqdm(enumerate(pieces), leave=False, position=0):
         for variation in tqdm(piece.get_all_variations(), leave=False, position=1):
@@ -58,7 +58,6 @@ if __name__ == "__main__":
                 rows.append(row)
                 row_piece_mapping[row_counter] = translation
                 row_counter += 1
-        # piece_counter += 1
 
     incidence_matrix = np.array(rows)
 
@@ -66,8 +65,6 @@ if __name__ == "__main__":
 
     # Create variables
     variables = [model.new_bool_var(f"{row}") for row in range(incidence_matrix.shape[0])]
-    # for row in range(incidence_matrix.shape[0]):
-    #     variables.append(model.new_bool_var(f"{row}"))
 
     # Create constraints
     for column in range(num_cells):
@@ -81,17 +78,18 @@ if __name__ == "__main__":
     solver.parameters.enumerate_all_solutions = True
     status = solver.solve(model, solution_callback=solution_store)
 
-    print(f"Status: {solver.status_name(status)}")
-    print(f"Conflicts: {solver.num_conflicts}")
-    print(f"Branches : {solver.num_branches}")
-    print(f"Wall time: {solver.wall_time} s")
-    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-        print(f"# Solutions found: {solution_store.solution_count}")
-    else:
-        print("No solution found.")
+    if verbose:
+        print(f"Status: {solver.status_name(status)}")
+        print(f"Conflicts: {solver.num_conflicts}")
+        print(f"Branches : {solver.num_branches}")
+        print(f"Wall time: {solver.wall_time} s")
+        if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            print(f"# Solutions found: {solution_store.solution_count}")
+        else:
+            print("No solution found.")
 
     for solution in solution_store.solutions:
         solved_grid = grid
         for i in solution:
             solved_grid = solved_grid.place_piece(row_piece_mapping[i], Point(0, 0))
-        plot_grid(solved_grid)
+        plot_grid(solved_grid, folder=folder)
