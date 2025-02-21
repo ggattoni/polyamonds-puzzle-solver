@@ -3,10 +3,9 @@ from __future__ import annotations
 from functools import cache, cached_property
 from typing import TYPE_CHECKING
 
-import sympy as sp
 from frozendict import frozendict
 
-from gla_puzzle.point import X_UNIT, Y_UNIT, Point
+from gla_puzzle.point import Point
 from gla_puzzle.triangle import Triangle
 
 if TYPE_CHECKING:
@@ -91,14 +90,14 @@ def create_triangle_line(num_triangles: int, leftmost_point: Point, *, up: bool)
     triangles = []
     for _ in range(num_triangles):
         if up:
-            a = leftmost_point + Point(0 * X_UNIT, 0 * Y_UNIT)
-            b = leftmost_point + Point(sp.Rational(1, 2) * X_UNIT, 1 * Y_UNIT)
-            c = leftmost_point + Point(1 * X_UNIT, 0 * Y_UNIT)
+            a = leftmost_point + Point(0, 0)
+            b = leftmost_point + Point(1, 1)
+            c = leftmost_point + Point(2, 0)
             leftmost_point = b
         else:
-            a = leftmost_point + Point(0 * X_UNIT, 0 * Y_UNIT)
-            b = leftmost_point + Point(1 * X_UNIT, 0 * Y_UNIT)
-            c = leftmost_point + Point(sp.Rational(1, 2) * X_UNIT, -1 * Y_UNIT)
+            a = leftmost_point + Point(0, 0)
+            b = leftmost_point + Point(2, 0)
+            c = leftmost_point + Point(1, -1)
             leftmost_point = c
         triangles.append(Triangle(a, b, c))
         up = not up

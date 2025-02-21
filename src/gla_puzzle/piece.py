@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import cache
+from math import pi
 from typing import TYPE_CHECKING, Literal
-
-import sympy as sp
 
 from gla_puzzle.point import Point
 
@@ -31,7 +30,7 @@ def _neg(piece: Piece) -> Piece:
 
 
 @cache
-def _rotate(piece: Piece, angle: sp.Expr) -> Piece:
+def _rotate(piece: Piece, angle: float) -> Piece:
     """Rotate the piece wrt to the origin."""
     return Piece(name=piece.name, triangles={triangle @ angle for triangle in piece.triangles})
 
@@ -54,12 +53,12 @@ def _reflect(piece: Piece, axis: Literal["x", "y"]) -> Piece:
 @cache
 def _is_central_translation_symmetric(piece: Piece) -> bool:
     """Check if the piece is central translation symmetric."""
-    translated_piece = piece @ sp.pi
+    translated_piece = piece @ pi
     y_shift = max(max(triangle.a.y, triangle.b.y, triangle.c.y) for triangle in piece.triangles) - max(
-        max(triangle.a.y, triangle.b.y, triangle.c.y) for triangle in (piece @ sp.pi).triangles
+        max(triangle.a.y, triangle.b.y, triangle.c.y) for triangle in (piece @ pi).triangles
     )
     x_shift = max(max(triangle.a.x, triangle.b.x, triangle.c.x) for triangle in piece.triangles) - max(
-        max(triangle.a.x, triangle.b.x, triangle.c.x) for triangle in (piece @ sp.pi).triangles
+        max(triangle.a.x, triangle.b.x, triangle.c.x) for triangle in (piece @ pi).triangles
     )
     translated_piece = translated_piece + Point(x_shift, y_shift)
     return piece == translated_piece
@@ -95,12 +94,12 @@ def _get_all_variations(piece: Piece) -> list[Piece]:
     transforms = []
     step = 1
     reflect = True
-    if any(_is_central_translation_symmetric(piece @ (k * sp.pi / 3)) for k in range(6)):
+    if any(_is_central_translation_symmetric(piece @ (k * pi / 3)) for k in range(6)):
         step = 2
-    if any(_is_reflection_same(piece @ (k * sp.pi / 3)) for k in range(6)):
+    if any(_is_reflection_same(piece @ (k * pi / 3)) for k in range(6)):
         reflect = False
     for k in range(0, 6, step):
-        rotated_piece = piece @ (k * sp.pi / 3)
+        rotated_piece = piece @ (k * pi / 3)
         transforms.append(rotated_piece)
         if reflect:
             transforms.append(rotated_piece.reflect(axis="x"))
@@ -135,7 +134,7 @@ class Piece:
         """Reflect the piece across the x-axis."""
         return _neg(self)
 
-    def __matmul__(self, angle: sp.Expr) -> Piece:
+    def __matmul__(self, angle: float) -> Piece:
         """Rotate the piece wrt to the origin."""
         return _rotate(self, angle)
 

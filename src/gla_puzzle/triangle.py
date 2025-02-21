@@ -7,8 +7,6 @@ from functools import cache, cached_property
 from statistics import mode
 from typing import Literal
 
-import sympy as sp
-
 from gla_puzzle.point import Point
 
 
@@ -31,7 +29,7 @@ def _neg(triangle: Triangle) -> Triangle:
 
 
 @cache
-def _rotate(triangle: Triangle, angle: sp.Expr) -> Triangle:
+def _rotate(triangle: Triangle, angle: float) -> Triangle:
     """Rotate the triangle wrt to the origin."""
     return Triangle(triangle.a @ angle, triangle.b @ angle, triangle.c @ angle)
 
@@ -58,8 +56,8 @@ class Triangle:
     def center(self) -> Point:
         """Return the center of the triangle."""
         return Point(
-            (sp.Max(self.a.x, self.b.x, self.c.x) + sp.Min(self.a.x, self.b.x, self.c.x)) / 2,
-            (sp.Max(self.a.y, self.b.y, self.c.y) + sp.Min(self.a.y, self.b.y, self.c.y)) / 2,
+            (max(self.a.x, self.b.x, self.c.x) + min(self.a.x, self.b.x, self.c.x)) / 2,
+            (max(self.a.y, self.b.y, self.c.y) + min(self.a.y, self.b.y, self.c.y)) / 2,
         )
 
     def __add__(self, other: Point) -> Triangle:
@@ -70,7 +68,7 @@ class Triangle:
         """Translate the triangle by a point."""
         return _sub(self, other)
 
-    def __matmul__(self, angle: sp.Expr) -> Triangle:
+    def __matmul__(self, angle: float) -> Triangle:
         """Rotate the triangle wrt to the origin."""
         return _rotate(self, angle)
 

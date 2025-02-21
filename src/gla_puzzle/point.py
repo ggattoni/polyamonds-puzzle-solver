@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from functools import cache
+from functools import cache, cached_property
+from math import cos, sin, sqrt
 
-import sympy as sp
-
-X_UNIT = sp.Integer(1)
-Y_UNIT = sp.sqrt(3) / 2
+X_UNIT = 0.5
+Y_UNIT = sqrt(3) / 2
 
 
 @cache
@@ -28,11 +27,11 @@ def _neg(point: Point) -> Point:
 
 
 @cache
-def _rotate(point: Point, angle: sp.Expr) -> Point:
+def _rotate(point: Point, angle: float) -> Point:
     """Rotate the point wrt to the origin."""
     return Point(
-        point.x * sp.cos(angle) - point.y * sp.sin(angle),
-        point.x * sp.sin(angle) + point.y * sp.cos(angle),
+        round((point.x * X_UNIT * cos(angle) - point.y * Y_UNIT * sin(angle)) / X_UNIT),
+        round((point.x * X_UNIT * sin(angle) + point.y * Y_UNIT * cos(angle)) / Y_UNIT),
     )
 
 
@@ -40,8 +39,8 @@ def _rotate(point: Point, angle: sp.Expr) -> Point:
 class Point:
     """Point class."""
 
-    x: sp.Expr
-    y: sp.Expr
+    x: int
+    y: int
 
     def __add__(self, other: Point) -> Point:
         """Translate the point by another point."""
@@ -51,7 +50,7 @@ class Point:
         """Translate the point by another point."""
         return _sub(self, other)
 
-    def __matmul__(self, angle: sp.Expr) -> Point:
+    def __matmul__(self, angle: float) -> Point:
         """Rotate the point wrt to the origin."""
         return _rotate(self, angle)
 
@@ -66,3 +65,8 @@ class Point:
     def __hash__(self) -> int:
         """Return the hash of the point."""
         return hash((self.x, self.y))
+
+    @cached_property
+    def coordinates(self) -> tuple[float, float]:
+        """Return the coordinates of the point."""
+        return self.x * X_UNIT, self.y * Y_UNIT
