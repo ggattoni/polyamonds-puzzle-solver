@@ -1,6 +1,6 @@
 [project]
 name = "polyamonds-puzzle-solver"
-version = "0.1.0"
+version = "0.2.0"
 description = "Solver for tangram-like polyamonds puzzles"
 readme = "README.md"
 authors = [
@@ -44,3 +44,11 @@ ignore = ["D203", "D213", "COM812", "ERA", "PLR0913", "T201", "B008", "D100", "I
 [tool.ruff.format]
 indent-style = "space"
 docstring-code-format = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true

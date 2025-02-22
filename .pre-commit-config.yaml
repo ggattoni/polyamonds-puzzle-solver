@@ -1,21 +1,33 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.2
-    hooks:
-      - id: ruff
-        args: [--fix]
-      - id: ruff-format
-  - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.5.22
-    hooks:
-      - id: uv-lock
-      - id: uv-sync
-      # Export requirements.txt and requirements-dev.txt
-      - id: uv-export
-        args: [-q, --frozen, --no-editable, --no-dev, --no-hashes, --output-file=requirements.txt]
-      - id: uv-export
-        args: [-q, --frozen, --no-editable, --only-dev, --no-hashes, --output-file=requirements-dev.txt]
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
-    hooks:
-      - id: commitizen
+- hooks:
+  - args:
+    - --fix
+    id: ruff
+  - id: ruff-format
+  repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.9.2
+- hooks:
+  - id: uv-lock
+  - id: uv-sync
+  - args:
+    - -q
+    - --frozen
+    - --no-editable
+    - --no-dev
+    - --no-hashes
+    - --output-file=requirements.txt
+    id: uv-export
+  - args:
+    - -q
+    - --frozen
+    - --no-editable
+    - --only-dev
+    - --no-hashes
+    - --output-file=requirements-dev.txt
+    id: uv-export
+  repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.5.22
+- hooks:
+  - id: commitizen
+  repo: https://github.com/commitizen-tools/commitizen
+  rev: v4.1.0
