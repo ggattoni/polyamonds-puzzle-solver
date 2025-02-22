@@ -5,10 +5,10 @@ from functools import cache
 from math import pi
 from typing import TYPE_CHECKING, Literal
 
-from gla_puzzle.point import Point
+from polyamonds_puzzle_solver.point import Point
 
 if TYPE_CHECKING:
-    from gla_puzzle.triangle import Triangle
+    from polyamonds_puzzle_solver.triangle import Triangle
 
 
 @cache

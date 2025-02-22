@@ -125,11 +125,11 @@ To get a local copy up and running follow these simple example steps.
 
 In order to solve a puzzle, use the following command:
 ```
-gla-puzzle solve <puzzle_name>
+pps solve <puzzle_name>
 ```
 By default, the solver used is a CP-SAT solver, but it can also be selected the brute force algorithm (keep in mind that it is quite slow with respect to the CP-SAT solver)
 ```
-gla-puzzle solve -s brute-force <puzzle_name>
+pps solve -s brute-force <puzzle_name>
 ```
 
 <!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->

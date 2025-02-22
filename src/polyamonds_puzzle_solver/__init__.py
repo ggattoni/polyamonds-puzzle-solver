@@ -1,4 +1,4 @@
-"""The gla_puzzle package provides classes for creating and solving puzzles created by Glauco."""
+"""The polyamonds_puzzle_solver package provides classes for creating and solving puzzles created by Glauco."""
 
 import importlib
 from pathlib import Path
@@ -37,7 +37,7 @@ def cli() -> None:
 def solve(puzzle: str, solver: str, *, verbose: bool = False) -> None:
     """Solve the puzzle with the desired solver."""
     try:
-        puzzle_module = importlib.import_module(f"gla_puzzle.puzzles.{puzzle}")
+        puzzle_module = importlib.import_module(f"polyamonds_puzzle_solver.puzzles.{puzzle}")
     except ModuleNotFoundError:
         click.echo(f"{puzzle} not found.")
         return

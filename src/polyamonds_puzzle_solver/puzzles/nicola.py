@@ -1,4 +1,4 @@
-from gla_puzzle import Grid, Piece, Point, Triangle, create_triangle_line
+from polyamonds_puzzle_solver import Grid, Piece, Point, Triangle, create_triangle_line
 
 N_PIECE = Piece(
     name="N",

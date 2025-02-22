@@ -4,10 +4,10 @@ import numpy as np
 from ortools.sat.python import cp_model
 from tqdm import tqdm
 
-from gla_puzzle.grid import Grid
-from gla_puzzle.piece import Piece
-from gla_puzzle.plot import plot_grid
-from gla_puzzle.point import Point
+from polyamonds_puzzle_solver.grid import Grid
+from polyamonds_puzzle_solver.piece import Piece
+from polyamonds_puzzle_solver.plot import plot_grid
+from polyamonds_puzzle_solver.point import Point
 
 
 class SolutionStore(cp_model.CpSolverSolutionCallback):

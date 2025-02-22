@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING
 
 from frozendict import frozendict
 
-from gla_puzzle.point import Point
-from gla_puzzle.triangle import Triangle
+from polyamonds_puzzle_solver.point import Point
+from polyamonds_puzzle_solver.triangle import Triangle
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from gla_puzzle.piece import Piece
+    from polyamonds_puzzle_solver.piece import Piece
 
 
 @cache

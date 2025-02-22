@@ -6,7 +6,7 @@ from matplotlib.patches import Polygon
 
 mpl.use("agg")
 
-from gla_puzzle import Grid
+from polyamonds_puzzle_solver import Grid
 
 num = 0
 

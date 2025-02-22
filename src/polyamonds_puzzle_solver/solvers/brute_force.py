@@ -2,9 +2,9 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from gla_puzzle.grid import Grid
-from gla_puzzle.piece import Piece
-from gla_puzzle.plot import plot_grid
+from polyamonds_puzzle_solver.grid import Grid
+from polyamonds_puzzle_solver.piece import Piece
+from polyamonds_puzzle_solver.plot import plot_grid
 
 
 def _find_first_solution(

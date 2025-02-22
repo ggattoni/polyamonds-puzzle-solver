@@ -1,160 +1,8 @@
-from gla_puzzle import Grid, Piece, Point, Triangle, create_triangle_line
+from polyamonds_puzzle_solver import Grid, Piece, Point, Triangle, create_triangle_line
 
-L_PIECE = Piece(
-    name="L",
+X_PIECE = Piece(
+    name="X",
     triangles={
-        Triangle(
-            Point(0, 0),
-            Point(1, 1),
-            Point(2, 0),
-        ),
-        Triangle(
-            Point(1, 1),
-            Point(2, 0),
-            Point(3, 1),
-        ),
-        Triangle(
-            Point(2, 0),
-            Point(3, 1),
-            Point(4, 0),
-        ),
-        Triangle(
-            Point(3, 1),
-            Point(4, 0),
-            Point(5, 1),
-        ),
-        Triangle(
-            Point(4, 0),
-            Point(5, 1),
-            Point(6, 0),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(6, 0),
-            Point(7, 1),
-        ),
-        Triangle(
-            Point(1, 1),
-            Point(2, 2),
-            Point(3, 1),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(3, 1),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(4, 2),
-            Point(3, 3),
-        ),
-        Triangle(
-            Point(4, 2),
-            Point(3, 3),
-            Point(5, 3),
-        ),
-        Triangle(
-            Point(3, 3),
-            Point(5, 3),
-            Point(4, 4),
-        ),
-        Triangle(
-            Point(5, 3),
-            Point(4, 4),
-            Point(6, 4),
-        ),
-    },
-)
-
-U_PIECE = Piece(
-    name="U",
-    triangles={
-        Triangle(
-            Point(0, 0),
-            Point(1, 1),
-            Point(2, 0),
-        ),
-        Triangle(
-            Point(1, 1),
-            Point(2, 0),
-            Point(3, 1),
-        ),
-        Triangle(
-            Point(2, 0),
-            Point(3, 1),
-            Point(4, 0),
-        ),
-        Triangle(
-            Point(3, 1),
-            Point(4, 0),
-            Point(5, 1),
-        ),
-        Triangle(
-            Point(4, 0),
-            Point(5, 1),
-            Point(6, 0),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(6, 0),
-            Point(7, 1),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(7, 1),
-            Point(6, 2),
-        ),
-        Triangle(
-            Point(7, 1),
-            Point(6, 2),
-            Point(8, 2),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(3, 3),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(3, 3),
-            Point(4, 2),
-            Point(5, 3),
-        ),
-        Triangle(
-            Point(4, 2),
-            Point(5, 3),
-            Point(6, 2),
-        ),
-        Triangle(
-            Point(5, 3),
-            Point(6, 2),
-            Point(7, 3),
-        ),
-        Triangle(
-            Point(6, 2),
-            Point(7, 3),
-            Point(8, 2),
-        ),
-        Triangle(
-            Point(7, 3),
-            Point(8, 2),
-            Point(9, 3),
-        ),
-    },
-)
-
-C_PIECE = Piece(
-    name="C",
-    triangles={
-        Triangle(
-            Point(0, 2),
-            Point(-1, 1),
-            Point(-2, 2),
-        ),
-        Triangle(
-            Point(0, 2),
-            Point(-1, 1),
-            Point(1, 1),
-        ),
         Triangle(
             Point(-1, 1),
             Point(0, 0),
@@ -196,31 +44,107 @@ C_PIECE = Piece(
             Point(8, 0),
         ),
         Triangle(
+            Point(3, 1),
             Point(5, 1),
-            Point(7, 1),
-            Point(6, 2),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(6, 2),
             Point(4, 2),
         ),
         Triangle(
-            Point(6, 2),
+            Point(5, 1),
             Point(4, 2),
+            Point(6, 2),
+        ),
+        Triangle(
+            Point(4, 2),
+            Point(6, 2),
             Point(5, 3),
         ),
         Triangle(
-            Point(4, 2),
-            Point(5, 3),
-            Point(3, 3),
+            Point(4, 0),
+            Point(2, 0),
+            Point(3, -1),
+        ),
+        Triangle(
+            Point(2, 0),
+            Point(3, -1),
+            Point(1, -1),
+        ),
+        Triangle(
+            Point(3, -1),
+            Point(1, -1),
+            Point(2, -2),
         ),
     },
 )
 
-I_PIECE = Piece(
-    name="I",
+T_PIECE = Piece(
+    name="T",
     triangles={
+        Triangle(
+            Point(-1, 1),
+            Point(0, 0),
+            Point(1, 1),
+        ),
+        Triangle(
+            Point(0, 0),
+            Point(1, 1),
+            Point(2, 0),
+        ),
+        Triangle(
+            Point(1, 1),
+            Point(2, 0),
+            Point(3, 1),
+        ),
+        Triangle(
+            Point(2, 0),
+            Point(3, 1),
+            Point(4, 0),
+        ),
+        Triangle(
+            Point(3, 1),
+            Point(4, 0),
+            Point(5, 1),
+        ),
+        Triangle(
+            Point(4, 0),
+            Point(5, 1),
+            Point(6, 0),
+        ),
+        Triangle(
+            Point(3, 1),
+            Point(1, 1),
+            Point(2, 2),
+        ),
+        Triangle(
+            Point(1, 1),
+            Point(2, 2),
+            Point(0, 2),
+        ),
+        Triangle(
+            Point(2, 2),
+            Point(0, 2),
+            Point(1, 3),
+        ),
+        Triangle(
+            Point(0, 2),
+            Point(1, 3),
+            Point(-1, 3),
+        ),
+        Triangle(
+            Point(1, 3),
+            Point(-1, 3),
+            Point(0, 4),
+        ),
+    },
+)
+
+E_PIECE = Piece(
+    name="E",
+    triangles={
+        Triangle(
+            Point(-1, 1),
+            Point(0, 0),
+            Point(1, 1),
+        ),
         Triangle(
             Point(0, 0),
             Point(1, 1),
@@ -261,17 +185,189 @@ I_PIECE = Piece(
             Point(8, 0),
             Point(9, 1),
         ),
+        Triangle(
+            Point(7, 1),
+            Point(9, 1),
+            Point(8, 2),
+        ),
+        Triangle(
+            Point(9, 1),
+            Point(8, 2),
+            Point(10, 2),
+        ),
+        Triangle(
+            Point(-1, 1),
+            Point(0, 2),
+            Point(1, 1),
+        ),
+        Triangle(
+            Point(0, 2),
+            Point(1, 1),
+            Point(2, 2),
+        ),
+        Triangle(
+            Point(3, 1),
+            Point(4, 2),
+            Point(5, 1),
+        ),
+        Triangle(
+            Point(4, 2),
+            Point(5, 1),
+            Point(6, 2),
+        ),
+    },
+)
+
+C_PIECE = Piece(
+    name="C",
+    triangles={
+        Triangle(
+            Point(-2, 2),
+            Point(0, 2),
+            Point(-1, 1),
+        ),
+        Triangle(
+            Point(0, 2),
+            Point(-1, 1),
+            Point(1, 1),
+        ),
+        Triangle(
+            Point(-1, 1),
+            Point(0, 0),
+            Point(1, 1),
+        ),
+        Triangle(
+            Point(0, 0),
+            Point(1, 1),
+            Point(2, 0),
+        ),
+        Triangle(
+            Point(1, 1),
+            Point(2, 0),
+            Point(3, 1),
+        ),
+        Triangle(
+            Point(2, 0),
+            Point(3, 1),
+            Point(4, 0),
+        ),
+        Triangle(
+            Point(3, 1),
+            Point(4, 0),
+            Point(5, 1),
+        ),
+        Triangle(
+            Point(4, 0),
+            Point(5, 1),
+            Point(6, 0),
+        ),
+        Triangle(
+            Point(5, 1),
+            Point(6, 0),
+            Point(7, 1),
+        ),
+        Triangle(
+            Point(7, 1),
+            Point(5, 1),
+            Point(6, 2),
+        ),
+        Triangle(
+            Point(5, 1),
+            Point(6, 2),
+            Point(4, 2),
+        ),
+        Triangle(
+            Point(6, 2),
+            Point(4, 2),
+            Point(5, 3),
+        ),
+        Triangle(
+            Point(4, 2),
+            Point(5, 3),
+            Point(3, 3),
+        ),
+    },
+)
+
+H_PIECE = Piece(
+    name="H",
+    triangles={
+        Triangle(
+            Point(-1, 1),
+            Point(0, 0),
+            Point(1, 1),
+        ),
+        Triangle(
+            Point(0, 0),
+            Point(1, 1),
+            Point(2, 0),
+        ),
+        Triangle(
+            Point(1, 1),
+            Point(2, 0),
+            Point(3, 1),
+        ),
+        Triangle(
+            Point(2, 0),
+            Point(3, 1),
+            Point(4, 0),
+        ),
+        Triangle(
+            Point(3, 1),
+            Point(4, 0),
+            Point(5, 1),
+        ),
+        Triangle(
+            Point(4, 0),
+            Point(5, 1),
+            Point(6, 0),
+        ),
+        Triangle(
+            Point(0, 2),
+            Point(1, 1),
+            Point(2, 2),
+        ),
+        Triangle(
+            Point(1, 1),
+            Point(2, 2),
+            Point(3, 1),
+        ),
+        Triangle(
+            Point(-3, 3),
+            Point(-2, 2),
+            Point(-1, 3),
+        ),
+        Triangle(
+            Point(-2, 2),
+            Point(-1, 3),
+            Point(0, 2),
+        ),
+        Triangle(
+            Point(-1, 3),
+            Point(0, 2),
+            Point(1, 3),
+        ),
+        Triangle(
+            Point(0, 2),
+            Point(1, 3),
+            Point(2, 2),
+        ),
+        Triangle(
+            Point(1, 3),
+            Point(2, 2),
+            Point(3, 3),
+        ),
+        Triangle(
+            Point(2, 2),
+            Point(3, 3),
+            Point(4, 2),
+        ),
     },
 )
 
 A_PIECE = Piece(
     name="A",
     triangles={
-        Triangle(
-            Point(-2, 0),
-            Point(-1, 1),
-            Point(0, 0),
-        ),
         Triangle(
             Point(-1, 1),
             Point(0, 0),
@@ -365,13 +461,13 @@ A_PIECE = Piece(
     },
 )
 
-N_PIECE = Piece(
-    name="N",
+I_PIECE = Piece(
+    name="I",
     triangles={
         Triangle(
             Point(0, 0),
-            Point(1, 1),
             Point(2, 0),
+            Point(1, 1),
         ),
         Triangle(
             Point(1, 1),
@@ -399,163 +495,34 @@ N_PIECE = Piece(
             Point(7, 1),
         ),
         Triangle(
-            Point(1, 1),
-            Point(2, 2),
-            Point(3, 1),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(3, 1),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(-1, 3),
-            Point(0, 2),
-            Point(1, 3),
-        ),
-        Triangle(
-            Point(0, 2),
-            Point(1, 3),
-            Point(2, 2),
-        ),
-        Triangle(
-            Point(1, 3),
-            Point(2, 2),
-            Point(3, 3),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(3, 3),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(3, 3),
-            Point(4, 2),
-            Point(5, 3),
-        ),
-        Triangle(
-            Point(4, 2),
-            Point(5, 3),
-            Point(6, 2),
+            Point(6, 0),
+            Point(7, 1),
+            Point(8, 0),
         ),
     },
 )
 
-O_PIECE = Piece(
-    name="O",
-    triangles={
-        Triangle(
-            Point(-1, 1),
-            Point(0, 0),
-            Point(1, 1),
-        ),
-        Triangle(
-            Point(0, 0),
-            Point(1, 1),
-            Point(2, 0),
-        ),
-        Triangle(
-            Point(1, 1),
-            Point(2, 0),
-            Point(3, 1),
-        ),
-        Triangle(
-            Point(2, 0),
-            Point(3, 1),
-            Point(4, 0),
-        ),
-        Triangle(
-            Point(3, 1),
-            Point(4, 0),
-            Point(5, 1),
-        ),
-        Triangle(
-            Point(4, 0),
-            Point(5, 1),
-            Point(6, 0),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(6, 0),
-            Point(7, 1),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(7, 1),
-            Point(6, 2),
-        ),
-        Triangle(
-            Point(5, 1),
-            Point(6, 2),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(-1, 1),
-            Point(1, 1),
-            Point(0, 2),
-        ),
-        Triangle(
-            Point(-1, 1),
-            Point(0, 2),
-            Point(-2, 2),
-        ),
-        Triangle(
-            Point(-2, 2),
-            Point(-1, 3),
-            Point(0, 2),
-        ),
-        Triangle(
-            Point(-1, 3),
-            Point(0, 2),
-            Point(1, 3),
-        ),
-        Triangle(
-            Point(0, 2),
-            Point(1, 3),
-            Point(2, 2),
-        ),
-        Triangle(
-            Point(1, 3),
-            Point(2, 2),
-            Point(3, 3),
-        ),
-        Triangle(
-            Point(2, 2),
-            Point(3, 3),
-            Point(4, 2),
-        ),
-        Triangle(
-            Point(3, 3),
-            Point(4, 2),
-            Point(5, 3),
-        ),
-        Triangle(
-            Point(4, 2),
-            Point(5, 3),
-            Point(6, 2),
-        ),
-    },
-)
 
-PIECES = [L_PIECE, U_PIECE, C_PIECE, I_PIECE, A_PIECE, N_PIECE, O_PIECE]
+PIECES = [X_PIECE, T_PIECE, E_PIECE, C_PIECE, H_PIECE, A_PIECE, I_PIECE]
 
 
 triangles = []
-up_triangles = [15, 17, 19]
+up_triangles = [13, 15, 17]
 up_leftmost_points = [
-    Point(-8, 3),
-    Point(-9, 2),
-    Point(-10, 1),
+    Point(-7, 3),
+    Point(-8, 2),
+    Point(-9, 1),
 ]
 for num_triangles, leftmost_point in zip(up_triangles, up_leftmost_points, strict=False):
     triangles.extend(create_triangle_line(num_triangles=num_triangles, leftmost_point=leftmost_point, up=True))
 
-down_triangles = [19, 17, 15, 13]
+down_triangles = [17, 15, 13, 11, 9]
 down_leftmost_points = [
-    Point(-10, 1),
-    Point(-9, 0),
-    Point(-8, -1),
-    Point(-7, -2),
+    Point(-9, 1),
+    Point(-8, 0),
+    Point(-7, -1),
+    Point(-6, -2),
+    Point(-5, -3),
 ]
 for num_triangles, leftmost_point in zip(down_triangles, down_leftmost_points, strict=False):
     triangles.extend(create_triangle_line(num_triangles=num_triangles, leftmost_point=leftmost_point, up=False))
@@ -565,11 +532,11 @@ GRID = Grid(triangles)
 __all__ = [
     "A_PIECE",
     "C_PIECE",
+    "E_PIECE",
     "GRID",
+    "H_PIECE",
     "I_PIECE",
-    "L_PIECE",
-    "N_PIECE",
-    "O_PIECE",
     "PIECES",
-    "U_PIECE",
+    "T_PIECE",
+    "X_PIECE",
 ]

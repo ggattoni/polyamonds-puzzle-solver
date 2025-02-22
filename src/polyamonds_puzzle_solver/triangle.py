@@ -7,7 +7,7 @@ from functools import cache, cached_property
 from statistics import mode
 from typing import Literal
 
-from gla_puzzle.point import Point
+from polyamonds_puzzle_solver.point import Point
 
 
 @cache

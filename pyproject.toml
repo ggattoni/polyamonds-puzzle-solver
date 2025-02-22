@@ -1,10 +1,10 @@
 [project]
-name = "gla-puzzle"
+name = "polyamonds-puzzle-solver"
 version = "0.1.0"
 description = "Solver for tangram-like polyamonds puzzles"
 readme = "README.md"
 authors = [
-    { name = "Giacomo Gattoni", email = "giacomo.gattoni@kantar-xtel.com" }
+    { name = "Giacomo Gattoni", email = "ggattoni3@gmail.com" }
 ]
 requires-python = ">=3.12"
 dependencies = [
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-gla_puzzle = "gla_puzzle:cli"
+pps = "polyamonds_puzzle_solver:cli"
 
 [build-system]
 requires = ["hatchling"]
